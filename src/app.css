@@ -4,7 +4,10 @@
 }
 
 
-.others{
+/* .others{
     flex:4;
-    /* background-color: #f1f1f1; */
+} */
+.link{
+    text-decoration: none;
+    color: inherit;
 }
