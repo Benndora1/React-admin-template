@@ -4,7 +4,7 @@ import {NotificationsNone, Language, Settings} from '@material-ui/icons';
 function topbar() {
     return (
         <div className="topbar">
-            Topbar
+        
             <div className="topbarWrapper">
                 <div className="topLeft">
                     <span className="logo">Admin</span>

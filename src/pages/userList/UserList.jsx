@@ -1,13 +1,22 @@
 import React from 'react'
 import "./userList.css"
 import { DataGrid } from '@material-ui/data-grid';
-import { DeleteOutline } from '@material-ui/icons'
+import { DeleteOutline } from '@material-ui/icons';
+import  {UserRows} from '../../dummyData';
+import { Link } from 'react-router-dom';
+import {useState} from "react"
 
 
 
 
 
 function UserList() {
+
+  const [data, setData] = useState(UserRows);
+
+  const handleDelete =(id) => {
+    setData(data.filter((item)=>item.id !== id)); //function to delete user
+  }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -39,7 +48,7 @@ function UserList() {
         {
             field: 'transaction',
             headerName: 'Transaction',
-            width: 150,
+            width: 160,
             editable: true,
           }, 
            {
@@ -49,8 +58,10 @@ function UserList() {
             renderCell:(params)=> {
                 return (
                     <>
-                        <button className="userListEdit">Edit</button>
-                         <DeleteOutline className="userListDelete"/>
+                    <Link to={"/user/"+params.row.id}>
+                    <button className="userListEdit">Edit</button>
+                    </Link>
+                    <DeleteOutline className="userListDelete" onClick={()=>handleDelete(params.row.id)}/>
                     </>
                 )
             }
@@ -59,76 +70,12 @@ function UserList() {
         }
       ];
       
-      const rows = [
-        { id: 1, username: 'Jon Snow',
-         avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-         email: "hon@gmail.com",
-         status: 'active',
-         transaction: "$120"
-          },
-          { id: 2, username: 'Jon Snow',
-          avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-          email: "hon@gmail.com",
-          status: 'active',
-          transaction: "$120"
-           },
-           { id: 3, username: 'Jon Snow',
-           avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-           email: "hon@gmail.com",
-           status: 'active',
-           transaction: "$120"
-            },
-            { id: 4, username: 'Jon Snow',
-            avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-            email: "hon@gmail.com",
-            status: 'active',
-            transaction: "$120"
-             },
-             { id: 5, username: 'Jon Snow',
-             avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-             email: "hon@gmail.com",
-             status: 'active',
-             transaction: "$120"
-              },
-              { id: 6, username: 'Jon Snow',
-              avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-              email: "hon@gmail.com",
-              status: 'active',
-              transaction: "$120"
-               },
-              { id: 7, username: 'Jon Snow',
-               avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-               email: "hon@gmail.com",
-               status: 'active',
-               transaction: "$120"
-                },
-                { id: 8, username: 'Jon Snow',
-                avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-                email: "hon@gmail.com",
-                status: 'active',
-                transaction: "$120"
-                 },
-                 { id: 9, username: 'Jon Snow',
-                 avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-                 email: "hon@gmail.com",
-                 status: 'active',
-                 transaction: "$120"
-                  },
-                  { id: 10, username: 'Jon Snow',
-                  avatar:"https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-                  email: "hon@gmail.com",
-                  status: 'active',
-                  transaction: "$120"
-                   }
-
-             
-    
-      ];
+     
     return (
         <div className="userList">
               
               <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         pageSize={10}
         checkboxSelection
